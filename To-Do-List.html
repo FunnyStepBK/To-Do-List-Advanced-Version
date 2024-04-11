@@ -4,16 +4,43 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="Styles/To-Do.css">
 
     <title>
-      Document
+      To Do List (Advanced Version)
     </title>
 
   </head>
   <body>
     
+    <p id="js-input-area">
+      
+      <span class="btn-containers">
+        <span class="btns-commons material-symbols-outlined js-input-btn">
+          add
+        </span>
+      </span>
+
+      <input id="js-todo-input" class="todo-input" type="text" placeholder="Add a Task">
+
+      <span class="btn-containers">
+        <span id="js-add-btn" class="btns-commons">
+          Add
+        </span>
+      </span>     
+
+    </p>
+    
+    <ul id="js-todo-HTML" class="todo-lists-container">
+
+      <!-- Todo items will be dynamically added here -->
+      
+    </ul>
+
+    <div class="to-do-lists"></div>
 
     <script src="/Scripts/To-Do.js"></script>
     

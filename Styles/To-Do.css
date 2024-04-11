@@ -1,0 +1,34 @@
+#js-input-area {
+  display: grid;
+  grid-template-columns: 1fr 90% 1fr;
+  grid-gap: 40px;
+}
+
+#js-todo-input {
+  border: none;
+}
+
+.btn-containers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+}
+
+.btns-commons {
+  cursor: pointer;
+}
+
+.todo-lists-container {
+  padding-left: 0px;
+}
+
+.to-do-list-container {
+  display: grid;
+  grid-template-columns: 1fr 90% 1fr;
+}
+
+
+.generated-btns-props {
+  cursor: pointer ;
+}
