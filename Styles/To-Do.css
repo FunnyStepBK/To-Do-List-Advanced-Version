@@ -1,3 +1,10 @@
+
+body {
+  background-color: rgb(3, 7, 30);
+  color: #fff;
+  font-family: monospace;
+}
+
 #js-input-area {
   display: grid;
   grid-template-columns: 1fr 90% 1fr;
@@ -6,6 +13,16 @@
 
 #js-todo-input {
   border: none;
+  background-color: transparent;
+  font-size: larger;
+}
+
+#js-todo-input:focus {
+  outline: none;
+}
+
+.todo-input {
+  color: rgb(0, 180, 216);
 }
 
 .btn-containers {
@@ -13,6 +30,7 @@
   justify-content: center;
   align-items: center;
   user-select: none;
+  font-size: larger;
 }
 
 .btns-commons {
@@ -26,9 +44,32 @@
 .to-do-list-container {
   display: grid;
   grid-template-columns: 1fr 90% 1fr;
+  transition: opacity 1s ease-in;
 }
 
+.todo-name {
+  font-size: larger;
+  position: relative;
+}
+
+.todo-name::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -6px;
+  width: var(--after-width, 0);
+  height: 1px;
+  background-color: white;
+  transition: width 800ms ease;
+}
+
+.todo-completed {
+  opacity: 0;
+}
 
 .generated-btns-props {
   cursor: pointer ;
+  user-select: none;
 }
+
+.todo-done-btn {}
