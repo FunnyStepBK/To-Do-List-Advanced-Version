@@ -65,7 +65,6 @@ function renderHTML () {
     const target = event.target;
 
     if (event.target.classList.contains('js-todo-done')) {
-      const todoTextItem = event.target.parentElement.nextElementSibling;
       const radioInput = target;
       const isChecked = radioInput.checked;
 
@@ -74,8 +73,6 @@ function renderHTML () {
       if (isChecked) {
         // Find the corresponding todo item index
         const radioInputs = toDoHTML.querySelectorAll('.js-todo-done');
-        const todoElement = checkbox.parentElement.nextElementSibling;
-        const index = Array.from(toDoArray).indexOf(todoElement);
         radioInputs.forEach((input, index) => {
           if (input === radioInput) {
             const todoItem = input.parentElement.parentElement; // Get the parent todo <li> element
