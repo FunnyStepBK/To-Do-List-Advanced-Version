@@ -16,31 +16,34 @@
   </head>
   <body>
     
-    <p id="js-input-area">
+    <div id="container">
+      <div id="todo-container">
+        <p id="js-input-area">
       
-      <span class="btn-containers">
-        <span class="btns-commons material-symbols-outlined js-input-btn">
-          add
-        </span>
-      </span>
-
-      <input id="js-todo-input" class="todo-input" type="text" placeholder="Add a Task">
-
-      <span class="btn-containers">
-        <span id="js-add-btn" class="btns-commons">
-          Add
-        </span>
-      </span>     
-
-    </p>
+          <span class="btn-containers">
+            <span class="btns-commons material-symbols-outlined js-input-btn">
+              add
+            </span>
+          </span>
     
-    <ul id="js-todo-HTML" class="todo-lists-container">
-
-      <!-- Todo items will be dynamically added here -->
-      
-    </ul>
-
-    <div class="to-do-lists"></div>
+          <input id="js-todo-input" class="todo-input" type="text" placeholder="Add a Task">
+    
+          <span class="btn-containers">
+            <span id="js-add-btn" class="btns-commons">
+              Add
+            </span>
+          </span>     
+    
+        </p>
+        
+        <ul id="js-todo-HTML" class="todo-lists-container">
+    
+          <!-- Todo items will be dynamically added here -->
+          
+        </ul>
+    
+      </div>  
+    </div>
 
     <script src="/Scripts/To-Do.js"></script>
     
