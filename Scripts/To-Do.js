@@ -5,6 +5,7 @@ const inputField = document.getElementById('js-todo-input');
 const toDoBtn = document.querySelector('.js-input-btn');
 const addBtn = document.getElementById('js-add-btn');
 const toDoHTML = document.getElementById('js-todo-HTML');
+const inputArea = document.getElementById('js-input-area');
 
 let idNoOfInput = 0;
 
@@ -30,14 +31,17 @@ inputField.addEventListener('keydown', (event) => {
 inputField.addEventListener('focus', () => {
   inputField.style.color = '#b8f500';
   toDoBtn.innerText = 'circle';
+  inputArea.style.borderColor = '#b8f500';
 });
 
-if (!inputField.value) {
-  inputField.addEventListener('blur', () => {
+inputField.addEventListener('blur', () => {
+  if (!inputField.value) {
     inputField.style.color = '#fff';
     toDoBtn.innerText = 'add_task';
-  })
-};
+    inputArea.style.borderColor = '#fff';
+  }
+})
+
 
 
 function renderHTML () {
@@ -51,7 +55,7 @@ function renderHTML () {
       .innerHTML += 
       `
       <input type="checkbox" id="input-${idNoOfInput}" class="generated-btns-props js-todo-done todo-done-btn">
-      <label class="js-todo-name" for="input-${idNoOfInput}">
+      <label class="js-todo-name" for="input-${idNoOfInput}" class="material-symbols-outlined">
         <span class="todo-name">
           ${toDoName}
         </span>
@@ -65,13 +69,13 @@ function renderHTML () {
     ;
 
     toDoHTML.appendChild(toDoElement);
+    addToArray();
   });
 }
 
-const newWidth = '100%';
-const initialWidth = '0%';
 
 toDoHTML.addEventListener('click', (event) => {
+
   if (event.target.classList.contains('js-todo-delete')) {
     const todoItem = event.target.parentElement.parentElement;
     const index = Array.from(toDoHTML.children).indexOf(todoItem);
@@ -81,31 +85,15 @@ toDoHTML.addEventListener('click', (event) => {
     } 
   };
 
-  const target = event.target;
+  if (event.target.classList.contains('js-todo-name')) {
+    const toDoItem = event.target.getElementsByTagName('span')[0];
+    toDoItem.classList.toggle('to-do-completed');
+  }
 
-  // if (event.target.classList.contains('js-todo-done')) {
-  //   const radioInput = target;
-  //   const isChecked = radioInput.checked;
-
-  //   var checkbox = target; // The clicked checkbox element
-
-  //   if (isChecked) {
-  //     // Find the corresponding todo item index
-  //     const radioInputs = toDoHTML.querySelectorAll('.js-todo-done');
-  //     radioInputs.forEach(() => {
-  //       if (event.target.checked) {
-  //         // checkbox.parentElement.nextElementSibling.classList.add('todo-completed');
-  //         // checkbox.parentElement.nextElementSibling.style.setProperty('--after-width', newWidth);
-  //       } 
-  //       // else {
-          
-  //       // }
-  //     });   
-  //   } else {
-  //     // checkbox.parentElement.nextElementSibling.classList.remove('todo-completed');
-  //     // checkbox.parentElement.nextElementSibling.style.setProperty('--after-width', initialWidth);
-  //   }
-  // }
+  if (event.target.classList.contains('todo-name')) {
+    const toDoItem = event.target;
+    toDoItem.classList.toggle('to-do-completed');
+  }
 });
 
 
