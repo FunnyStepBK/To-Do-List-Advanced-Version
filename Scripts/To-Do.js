@@ -40,14 +40,13 @@ inputField.addEventListener('blur', () => {
     toDoBtn.innerText = 'add_task';
     inputArea.style.borderColor = '#fff';
   }
-})
-
+});
 
 
 function renderHTML () {
   toDoHTML.innerHTML = '';
 
-  toDoArray.forEach((toDoName) => {
+  toDoArray.forEach((toDoTask) => {
     idNoOfInput += 1;
     const toDoElement = document.createElement('li');
     toDoElement.className = 'to-do-list-container py-1';
@@ -55,20 +54,34 @@ function renderHTML () {
       .innerHTML += 
       `
       <input type="checkbox" id="input-${idNoOfInput}" class="generated-btns-props js-todo-done todo-done-btn">
-      <label class="js-todo-name" for="input-${idNoOfInput}" class="material-symbols-outlined">
-        <span class="todo-name">
-          ${toDoName}
+
+      <label class="js-todo-name for="input-${idNoOfInput}">
+
+        <span class="todo-name" style="opacity: ${toDoTask.opacity}; text-decoration: ${toDoTask.textDecoration};">
+          ${toDoTask.inputValue}
         </span>
+
       </label>
+
       <span class="delete-btn-cont">
+      
         <span class="material-symbols-outlined generated-btns-props js-todo-delete">
           close
         </span>
+
       </span> 
       `
     ;
 
     toDoHTML.appendChild(toDoElement);
+
+    const assinInput = document.getElementById(`input-${idNoOfInput}`);
+
+    const labelBefore = assinInput.nextElementSibling;
+
+    labelBefore.style.setProperty('--before-content', toDoTask.beforeContent);
+    labelBefore.style.setProperty('--before-background-color',toDoTask.beforeBackColor);
+    
     addToArray();
   });
 }
@@ -86,13 +99,59 @@ toDoHTML.addEventListener('click', (event) => {
   };
 
   if (event.target.classList.contains('js-todo-name')) {
-    const toDoItem = event.target.getElementsByTagName('span')[0];
-    toDoItem.classList.toggle('to-do-completed');
-  }
+    const toDoItem = event.target.parentElement;
+    const toDoChild = event.target.getElementsByTagName('span')[0];
+
+    const index = Array.from(toDoHTML.children).indexOf(toDoItem);
+
+    if (toDoChild.style.opacity === '1') {
+      toDoArray[index].opacity = '0.5';
+      toDoArray[index].textDecoration = 'line-through';
+      toDoArray[index].beforeContent = 
+      `url(Icons/Star-icon.png)`
+      ;
+      toDoArray[index].beforeBackColor = 
+      `#ffd60a`
+      ;
+    } else {
+      toDoArray[index].opacity = '1';
+      toDoArray[index].textDecoration = 'none';
+      toDoArray[index].beforeContent = 
+        `''`
+      ;
+      toDoArray[index].beforeBackColor = 
+        `#fff`
+      ;
+    }
+    renderHTML();
+    addToArray();
+  };
 
   if (event.target.classList.contains('todo-name')) {
     const toDoItem = event.target;
-    toDoItem.classList.toggle('to-do-completed');
+    const index = Array.from(toDoHTML.children).indexOf(toDoItem.parentElement.parentElement);
+
+    if (toDoItem.style.opacity === '1') {
+      toDoArray[index].opacity = '0.5';
+      toDoArray[index].textDecoration = 'line-through';
+      toDoArray[index].beforeContent = 
+      `url(Icons/Star-icon.png)`
+      ;
+      toDoArray[index].beforeBackColor = 
+      `#ffd60a`
+      ;
+    } else {
+      toDoArray[index].opacity = '1';
+      toDoArray[index].textDecoration = 'none';
+      toDoArray[index].beforeContent = 
+        `''`
+      ;
+      toDoArray[index].beforeBackColor = 
+        `#fff`
+      ;
+    }
+    renderHTML();
+    addToArray();
   }
 });
 
@@ -107,19 +166,24 @@ function addToDo () {
   const inputValue = inputField.value.trim();
 
   if (inputValue !== '') {
-    toDoArray.push(inputValue);
+
+    toDoArray.push({
+      inputValue,
+      opacity: '1', 
+      textDecoration:'none',
+      beforeContent: '""',
+      beforeBackColor: '#fff'
+    });
+
     inputField.value = ''; 
+
     renderHTML();
   }
-  addToArray();
-};
 
-function toDoComplete (index) {
-  toDoArray[index].classList.add('todo-completed');
+  addToArray();
 };
 
 function removeToDo (index) {
   toDoArray.splice(index, 1);
-  btnClicked = true;
   addToArray();
 };
