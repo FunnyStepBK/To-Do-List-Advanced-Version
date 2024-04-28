@@ -13,6 +13,49 @@ body {
   background-attachment: fixed;
 }
 
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.75s, visibility 0.75s;
+  z-index: 1;
+}
+
+.loader--hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loader::before {
+  box-sizing: border-box;
+  content: '';
+  width: 75px;
+  height: 75px;
+  background-color: #000;
+  border: 10px solid #fff;
+  border-top-color: #1e96fc;
+  border-radius: 50%;
+  animation: loader 0.75s ease-in infinite;
+}
+
+@keyframes loader {
+
+  from {
+    transform: rotate(0turn);
+  }
+
+  to {
+    transform: rotate(1turn);
+  }
+
+}
+
 #container {
   display: flex;
   justify-content: center;
@@ -145,11 +188,12 @@ body {
   width: 1.2em;
   height: 1.2em;
   border-radius: 50%;
-  background-color: var(--before-background-color, #fff);
+  background-color: var(--before-background-color, #ffd60a);
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: 900;
+  /* border: 2px solid #ffd60a; */
 }
 
 .todo-name {
@@ -160,6 +204,8 @@ body {
   letter-spacing: 1.2px;
   margin-left: 4px;
   overflow-wrap: break-word;
+  cursor: text;
+  letter-spacing: 3px;
 }
 
 .generated-btns-props {

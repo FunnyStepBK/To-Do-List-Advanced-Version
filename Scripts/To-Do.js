@@ -1,3 +1,15 @@
+const loader = document.querySelector('.loader');
+
+window.addEventListener('load', () => {
+  loader.classList.add('loader--hidden');
+});
+
+
+setTimeout( () => {
+  document.body.removeChild(loader);
+}, 2000);
+
+
 let toDoArray = JSON.parse(localStorage.getItem('toDoTasks')) || [];
 
 
@@ -9,6 +21,10 @@ const inputArea = document.getElementById('js-input-area');
 
 let idNoOfInput = 0;
 
+let editedToDo = false;
+
+let editedToDoIndex;
+
 renderHTML();
 
 toDoBtn.addEventListener('click', () => {
@@ -17,21 +33,21 @@ toDoBtn.addEventListener('click', () => {
 });
 
 addBtn.addEventListener('click', () => {
-  addToDo();
+  addToDo(editedToDoIndex);
   toDoBtn.innerText = 'add_task';
 });
 
 inputField.addEventListener('keydown', (event) => {
   if (event.key === 'Enter') {
-    addToDo();
+    addToDo(editedToDoIndex);
     toDoBtn.innerText = 'add_task';
   }
 });
 
 inputField.addEventListener('focus', () => {
-  inputField.style.color = '#b8f500';
+  inputField.style.color = '#ffd60a';
   toDoBtn.innerText = 'circle';
-  inputArea.style.borderColor = '#b8f500';
+  inputArea.style.borderColor = '#ffd60a';
 });
 
 inputField.addEventListener('blur', () => {
@@ -131,25 +147,12 @@ toDoHTML.addEventListener('click', (event) => {
     const toDoItem = event.target;
     const index = Array.from(toDoHTML.children).indexOf(toDoItem.parentElement.parentElement);
 
-    if (toDoItem.style.opacity === '1') {
-      toDoArray[index].opacity = '0.5';
-      toDoArray[index].textDecoration = 'line-through';
-      toDoArray[index].beforeContent = 
-      `url(Icons/Star-icon.png)`
-      ;
-      toDoArray[index].beforeBackColor = 
-      `#ffd60a`
-      ;
-    } else {
-      toDoArray[index].opacity = '1';
-      toDoArray[index].textDecoration = 'none';
-      toDoArray[index].beforeContent = 
-        `''`
-      ;
-      toDoArray[index].beforeBackColor = 
-        `#fff`
-      ;
-    }
+    inputField.value = toDoArray[index].inputValue;
+    inputField.focus();
+    removeToDo(index);
+    editedToDo = true;
+    editedToDoIndex = index;
+    
     renderHTML();
     addToArray();
   }
@@ -162,23 +165,46 @@ function addToArray () {
 };
 
 
-function addToDo () {
+function addToDo (editedToDoIndex) {
   const inputValue = inputField.value.trim();
 
-  if (inputValue !== '') {
+  if (!editedToDo) {
+    if (inputValue !== '') {
 
-    toDoArray.push({
-      inputValue,
-      opacity: '1', 
-      textDecoration:'none',
-      beforeContent: '""',
-      beforeBackColor: '#fff'
-    });
+      toDoArray.push({
+        inputValue,
+        opacity: '1', 
+        textDecoration:'none',
+        beforeContent: '""',
+        beforeBackColor: '#fff'
+      });
 
-    inputField.value = ''; 
+      editedToDo = false;
+  
+      inputField.value = ''; 
+  
+      renderHTML();
+    }
+  } else if (editedToDo) {
+    if (inputValue !== '') {
 
-    renderHTML();
+      toDoArray.splice(editedToDoIndex, 0, {
+        inputValue,
+        opacity: '1', 
+        textDecoration:'none',
+        beforeContent: '""',
+        beforeBackColor: '#fff'
+      });
+
+      editedToDo = false;
+  
+      inputField.value = ''; 
+  
+      renderHTML();
+    }
   }
+
+  
 
   addToArray();
 };
