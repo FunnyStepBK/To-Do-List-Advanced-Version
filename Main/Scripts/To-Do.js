@@ -35,6 +35,8 @@ toDoBtn.addEventListener('click', () => {
 addBtn.addEventListener('click', () => {
   addToDo(editedToDoIndex);
   toDoBtn.innerText = 'add_task';
+  inputArea.style.borderColor = '#fff';
+  inputField.style.color = '#fff';
 });
 
 inputField.addEventListener('keydown', (event) => {
