@@ -4,6 +4,10 @@
   src: url(whatever-it-takes.ttf);
 }
 
+html {
+  scrollbar-width: none;
+}
+
 body {
   color: #fff;
   background-image: url(Images/Chalk-Board.jpg);
@@ -11,6 +15,10 @@ body {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 .loader {

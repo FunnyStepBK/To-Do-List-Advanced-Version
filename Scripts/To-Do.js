@@ -91,9 +91,9 @@ function renderHTML () {
 
     toDoHTML.appendChild(toDoElement);
 
-    const assinInput = document.getElementById(`input-${idNoOfInput}`);
+    const assignedInput = document.getElementById(`input-${idNoOfInput}`);
 
-    const labelBefore = assinInput.nextElementSibling;
+    const labelBefore = assignedInput.nextElementSibling;
 
     labelBefore.style.setProperty('--before-content', toDoTask.beforeContent);
     labelBefore.style.setProperty('--before-background-color',toDoTask.beforeBackColor);
