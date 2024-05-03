@@ -40,7 +40,7 @@ addBtn.addEventListener('click', () => {
 inputField.addEventListener('keydown', (event) => {
   if (event.key === 'Enter') {
     addToDo(editedToDoIndex);
-    toDoBtn.innerText = 'add_task';
+    toDoBtn.innerText = 'circle';
   }
 });
 
